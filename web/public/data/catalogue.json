@@ -1,0 +1,135 @@
+{
+  "catalogue": [
+    {
+      "id": 1,
+      "code": "826963",
+      "owner": "Bagas Yadher",
+      "name": "Black Death",
+      "benchmark": "10506",
+      "team": {
+        "cpu": "AMD",
+        "gpu": "NVIDIA"
+      },
+      "specifications": {
+        "cpu": {
+          "brand": "AMD",
+          "model": "Ryzen 5 7600X 4,7 GHz"
+        },
+        "gpu": {
+          "brand": "Gigabyte",
+          "manufacturer": "NVIDIA",
+          "model": "RTX 4070 Ti 12 GB GDDR6X Gaming OC"
+        },
+        "motherboard": {
+          "brand": "ASUS",
+          "model": "TUF B450-PLUS WIFI"
+        },
+        "ram": [
+          {
+            "brand": "Kingston",
+            "model": "Fury Beast DDR5 5200 MHz",
+            "size": "16 GB",
+            "quantity": 2
+          }
+        ],
+        "storage": [
+          {
+            "brand": "WD",
+            "model": "Black M.2 NVMe",
+            "size": "1 TB",
+            "quantity": 1
+          },
+          {
+            "brand": "WD",
+            "model": "Black M.2 NVMe",
+            "size": "500 GB",
+            "quantity": 1
+          }
+        ],
+        "power supply": {
+          "brand": "Corsair",
+          "model": "RM650x 650W 80+ Bronze"
+        },
+        "cpu cooler": {
+          "type": "Air",
+          "brand": "NZXT",
+          "model": "T120 Black"
+        },
+        "case": {
+          "brand": "Fractal Design",
+          "model": "Pop Mini Silent Black TG"
+        }
+      },
+      "gallery": [
+        {
+          "thumbnail": true,
+          "src": "/img/Eterna.png"
+        }
+      ],
+      "price_value": 18000000
+    },
+    {
+      "id": 2,
+      "code": "333646",
+      "owner": "R",
+      "name": "Eterna",
+      "benchmark": "11648",
+      "team": {
+        "cpu": "AMD",
+        "gpu": "AMD"
+      },
+      "specifications": {
+        "cpu": {
+          "brand": "AMD",
+          "model": "Ryzen 9 7950X3D 4,2 GHz"
+        },
+        "gpu": {
+          "brand": "Asus",
+          "manufacturer": "AMD",
+          "model": "TUF RX 7900 XTX 24 GB GDDR6 Gaming OC"
+        },
+        "motherboard": {
+          "brand": "Asus",
+          "model": "ROG STRIX B650E-F Gaming WIFI"
+        },
+        "ram": [
+          {
+            "brand": "Corsair",
+            "model": "Vengeance DDR5 6000 MHz",
+            "size": "16 GB",
+            "quantity": 2
+          }
+        ],
+        "storage": [
+          {
+            "brand": "Samsung",
+            "model": "970 EVO Plus M.2 NVMe",
+            "size": "1 TB",
+            "quantity": 1
+          }
+        ],
+        "power supply": {
+          "brand": "Corsair",
+          "model": "RM850x 850W 80+ Gold"
+        },
+        "cpu cooler": {
+          "type": "AIO",
+          "brand": "Cooler Master",
+          "model": "MasterLiquid 360L Core ARGB"
+        },
+        "case": {
+          "brand": "Fractal",
+          "model": "Fractal Design Pop Mini Black"
+        }
+      },
+      "gallery": [
+        {
+          "thumbnail": true,
+          "src": "/img/Eterna.png"
+        }
+      ],
+      "price_value": 45000000
+    }
+  ],
+  "lastupdate": "2024-12-25T19:00:00.000Z"
+}
