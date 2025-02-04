@@ -1,0 +1,1 @@
+ALTER TABLE `components` ADD `name` text NOT NULL;

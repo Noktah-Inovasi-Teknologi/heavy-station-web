@@ -1,0 +1,48 @@
+{
+  "version": "7",
+  "dialect": "sqlite",
+  "entries": [
+    {
+      "idx": 0,
+      "version": "6",
+      "when": 1736926409991,
+      "tag": "0000_bouncy_titanium_man",
+      "breakpoints": true
+    },
+    {
+      "idx": 1,
+      "version": "6",
+      "when": 1736927615355,
+      "tag": "0001_clean_thaddeus_ross",
+      "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "6",
+      "when": 1736928012600,
+      "tag": "0002_strong_leader",
+      "breakpoints": true
+    },
+    {
+      "idx": 3,
+      "version": "6",
+      "when": 1736945781491,
+      "tag": "0003_smooth_dagger",
+      "breakpoints": true
+    },
+    {
+      "idx": 4,
+      "version": "6",
+      "when": 1737557934367,
+      "tag": "0004_thankful_thundra",
+      "breakpoints": true
+    },
+    {
+      "idx": 5,
+      "version": "6",
+      "when": 1737612363021,
+      "tag": "0005_medical_unus",
+      "breakpoints": true
+    }
+  ]
+}

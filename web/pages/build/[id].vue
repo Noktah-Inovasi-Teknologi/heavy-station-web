@@ -19,6 +19,9 @@ function formatByteSize(size: number) {
     return (size / 1024).toFixed(2) + " TB";
   }
 }
+function formatFrequency(frequency: number) {
+  return frequency.toFixed(2) + " GHz";
+}
 async function fetchBuild() {
   build.value = await $fetch("/api/build/" + route.params.id, {
     method: "GET",
@@ -49,17 +52,12 @@ onMounted(async () => {
       <div
         class="h-full py-24 pr-16 flex flex-col justify-between font-kanit font-light text-[#838383]"
       >
-        <div
-          class="w-full h-48 p-16 bg-gradient-to-r from-[#FF2424] from-35% to-[#76B900] to-55% flex items-center justify-between font-kanit font-semibold text-7xl text-white"
-        >
-          <p>INTEL</p>
-          <p>NVIDIA</p>
-        </div>
+        <Team class="mb-8" size="xl" :cpu="build.team.cpu" :gpu="build.team.gpu" />
         <div class="flex flex-col gap-8">
           <div>
             <p>Nama</p>
             <div class="my-2 border-b border-[#3F3F3F]"></div>
-            <p class="font-kanit text-5xl text-[#FA1D33]">{{ build.name }}</p>
+            <p class="font-kanit text-5xl text-[#FA1D33]"> {{ build.name }}</p>
           </div>
           <div>
             <p>Kode</p>
@@ -108,7 +106,7 @@ onMounted(async () => {
         <SpecField
           class="w-full"
           label="Base Frequency"
-          :value="build.specifications.cpu.base_frequency"
+          :value="formatFrequency(build.specifications.cpu.base_frequency)"
         />
       </div>
       <div class="flex items-center border border-[#3F3F3F]">

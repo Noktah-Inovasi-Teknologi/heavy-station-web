@@ -1,11 +1,7 @@
-export default defineEventHandler(async () => {
-  const db = useDatabase();
-  const result: any = await db.sql`
-    SELECT
-      COUNT(*) AS total
-    FROM
-      builds
-    `;
+import { db } from "~/db/index";
+import { builds } from "~/db/schema";
 
-  return result.rows[0].total;
+export default defineEventHandler(async () => {
+  const result: any = await db.$count(builds);
+  return result;
 });

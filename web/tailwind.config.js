@@ -16,6 +16,7 @@ export default {
         fontFamily: {
           kanit: ['Kanit', 'sans-serif'],
           tomorrow: ['Tomorrow', 'sans-serif'],
+          hostgrotesk: ['Host Grotesk']
         }
     }
   },

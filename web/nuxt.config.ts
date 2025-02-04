@@ -14,7 +14,7 @@ export default defineNuxtConfig({
         },
         {
           rel: "stylesheet",
-          href: "https://fonts.googleapis.com/css2?family=Kanit:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Tomorrow:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap",
+          href: "https://fonts.googleapis.com/css2?family=Kanit:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Tomorrow:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Host+Grotesk:ital,wght@0,300..800;1,300..800&display=swap",
         },
       ],
     },
@@ -35,10 +35,19 @@ export default defineNuxtConfig({
       }
     }
   },
-  modules: ["@primevue/nuxt-module", "@nuxtjs/tailwindcss", "@nuxt/icon", "nuxt-auth-utils"],
+  modules: ["@primevue/nuxt-module", "@nuxtjs/tailwindcss", "@nuxt/icon", "nuxt-auth-utils", "nuxt-lodash"],
   primevue: {
     options: {
       theme: "none",
     },
   },
+  runtimeConfig: {
+    oauth: {
+      google: {
+        clientId: process.env.GOOGLE_CLIENT_ID,
+        clientSecret: process.env.GOOGLE_CLIENT_SECRET,
+        redirectURL: process.env.GOOGLE_REDIRECT_URL
+      }
+    }
+  }
 });
