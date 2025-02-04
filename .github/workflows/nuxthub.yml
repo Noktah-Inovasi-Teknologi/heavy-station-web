@@ -13,7 +13,7 @@ jobs:
       id-token: write
     defaults:
       run:
-        working-directory: web
+        working-directory: ./web/
 
     steps:
       - uses: actions/checkout@v4
@@ -26,6 +26,7 @@ jobs:
         with:
           node-version: 22
           cache: 'npm'
+          cache-dependency-path: 'web/package-lock.json'
 
       - name: Install dependencies
         run: npm install
