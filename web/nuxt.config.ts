@@ -35,7 +35,7 @@ export default defineNuxtConfig({
       }
     }
   },
-  modules: ["@primevue/nuxt-module", "@nuxtjs/tailwindcss", "@nuxt/icon", "nuxt-auth-utils", "nuxt-lodash"],
+  modules: ["@primevue/nuxt-module", "@nuxtjs/tailwindcss", "@nuxt/icon", "nuxt-auth-utils", "nuxt-lodash", "@nuxthub/core"],
   primevue: {
     options: {
       theme: "none",
