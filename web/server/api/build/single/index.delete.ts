@@ -1,4 +1,4 @@
-import { db } from "~/db/index";
+import { db } from "~/utils/db/index";
 import {
   builds,
   teams,
@@ -13,7 +13,7 @@ import {
   cpu_coolers,
   case_fans,
   cases,
-} from "~/db/schema";
+} from "~/utils/db/schema";
 import { eq } from "drizzle-orm";
 
 const schemaMap: Record<string, any> = {

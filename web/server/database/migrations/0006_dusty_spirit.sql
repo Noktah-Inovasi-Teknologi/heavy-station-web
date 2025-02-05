@@ -1,0 +1,1 @@
+ALTER TABLE `price_histories` ADD `component_id` integer NOT NULL REFERENCES components(id);

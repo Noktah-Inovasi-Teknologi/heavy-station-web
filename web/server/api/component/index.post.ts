@@ -1,7 +1,7 @@
 import csvParser from "csv-parser";
 import { Readable } from "stream";
-import { db } from "~/db/index";
-import { components } from "~/db/schema";
+import { db } from "~/utils/db/index";
+import { components } from "~/utils/db/schema";
 
 export default defineEventHandler(async (event) => {
   const files = await readMultipartFormData(event);

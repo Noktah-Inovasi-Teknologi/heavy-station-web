@@ -1,6 +1,6 @@
-import { db } from "~/db/index";
-import { builds } from "~/db/schema";
-import { teams, galleries } from "~/db/schema";
+import { db } from "~/utils/db/index";
+import { builds } from "~/utils/db/schema";
+import { teams, galleries } from "~/utils/db/schema";
 import { eq, sql } from "drizzle-orm";
 import { SQLiteRaw } from "drizzle-orm/sqlite-core/query-builders/raw";
 

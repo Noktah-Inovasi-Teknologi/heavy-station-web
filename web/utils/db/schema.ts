@@ -151,6 +151,10 @@ export const components = p.sqliteTable("components", {
 
 export const price_histories = p.sqliteTable("price_histories", {
   id: p.integer().primaryKey({ autoIncrement: true }),
+  component_id: p
+    .integer()
+    .notNull()
+    .references(() => components.id, { onDelete: "cascade" }),
   date: p.text().notNull(), // YYYY-MM-DD
   price: p.integer().notNull(),
   available: p.integer({ mode: "boolean" }),

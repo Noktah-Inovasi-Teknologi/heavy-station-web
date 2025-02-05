@@ -31,11 +31,24 @@ export default defineNuxtConfig({
         connector: "sqlite",
         options: {
           filename: "./db.sqlite3",
-        }
-      }
-    }
+        },
+      },
+    },
   },
-  modules: ["@primevue/nuxt-module", "@nuxtjs/tailwindcss", "@nuxt/icon", "nuxt-auth-utils", "nuxt-lodash", "@nuxthub/core"],
+  hub: {
+    database: true,
+    kv: true,
+    blob: true,
+    cache: true,
+  },
+  modules: [
+    "@primevue/nuxt-module",
+    "@nuxtjs/tailwindcss",
+    "@nuxt/icon",
+    "nuxt-auth-utils",
+    "nuxt-lodash",
+    "@nuxthub/core",
+  ],
   primevue: {
     options: {
       theme: "none",
@@ -46,8 +59,8 @@ export default defineNuxtConfig({
       google: {
         clientId: process.env.GOOGLE_CLIENT_ID,
         clientSecret: process.env.GOOGLE_CLIENT_SECRET,
-        redirectURL: process.env.GOOGLE_REDIRECT_URL
-      }
-    }
-  }
+        redirectURL: process.env.GOOGLE_REDIRECT_URL,
+      },
+    },
+  },
 });

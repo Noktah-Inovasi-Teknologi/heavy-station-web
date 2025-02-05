@@ -1,4 +1,4 @@
-import { db } from "~/db/index";
+import { db } from "~/utils/db/index";
 
 export default defineEventHandler(async (event) => {
   const query: any = getQuery(event);
