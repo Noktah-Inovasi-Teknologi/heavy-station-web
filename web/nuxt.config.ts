@@ -25,6 +25,7 @@ export default defineNuxtConfig({
   nitro: {
     experimental: {
       database: true,
+      openAPI: true,
     },
     database: {
       default: {
