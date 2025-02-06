@@ -33,6 +33,12 @@ jobs:
 
       - name: Build application
         run: npm run build
+        env: 
+          GOOGLE_CLIENT_ID: ${{ secrets.GOOGLE_CLIENT_ID }}
+          GOOGLE_CLIENT_SECRET: ${{ secrets.GOOGLE_CLIENT_SECRET }}
+          GOOGLE_REDIRECT_URL: ${{ env.GOOGLE_REDIRECT_URL }}
+          ADMIN_SUB: ${{ secrets.ADMIN_SUB }}
+          ADMIN_EMAIL: ${{ secrets.ADMIN_EMAIL }}
 
       - name: Deploy to NuxtHub
         uses: nuxt-hub/action@v1
