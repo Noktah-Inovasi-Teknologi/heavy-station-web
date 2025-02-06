@@ -264,6 +264,7 @@ onMounted(async () => {});
             @update:item="value.case = $event"
           />
         </div>
+        Test
         <!-- <div>
           <p class="mb-8 font-kanit text-[#FA1D33] text-5xl">Pelengkap</p>
           <SimulationField
