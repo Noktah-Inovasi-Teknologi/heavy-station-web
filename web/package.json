@@ -16,6 +16,7 @@
     "@primeuix/utils": "^0.4.1",
     "csv-parser": "^3.1.0",
     "drizzle-orm": "^0.38.3",
+    "googleapis": "^144.0.0",
     "nuxt": "^3.15.0",
     "nuxt-auth-utils": "^0.5.7",
     "primevue": "^4.2.5",

@@ -60,18 +60,18 @@ export default defineEventHandler(async (event) => {
 
     // Insert into teams table
     const teamResult = await useDrizzle().insert(teams).values({
-      build_id: insertedIds.build_id,
+      build_id: insertedIds.build_id[0],
       cpu: requestBody.team.cpu,
       gpu: requestBody.team.gpu,
     });
-    insertedIds.teams.push(insertedIds.build_id);
+    insertedIds.teams.push(insertedIds.build_id[0]);
 
     // Insert into galleries
     for (let gallery of requestBody.gallery) {
       const galleryResult = await useDrizzle()
         .insert(galleries)
         .values({
-          build_id: insertedIds.build_id,
+          build_id: insertedIds.build_id[0],
           thumbnail: gallery.thumbnail,
           src: gallery.src,
         })
@@ -84,19 +84,19 @@ export default defineEventHandler(async (event) => {
     const specResult = await useDrizzle()
       .insert(specifications)
       .values({
-        build_id: insertedIds.build_id,
+        build_id: insertedIds.build_id[0],
       })
       .returning({ id: specifications.id });
 
     if (specResult.length === 0)
       throw new Error("Failed to insert specifications");
-    insertedIds.specification_id = specResult[0].id;
+    insertedIds.specification_id.push(specResult[0].id);
 
     // Insert CPU
     const cpuResult = await useDrizzle()
       .insert(cpus)
       .values({
-        specification_id: insertedIds.specification_id,
+        specification_id: insertedIds.specification_id[0],
         brand: requestBody.specification.cpu.brand,
         model: requestBody.specification.cpu.model,
         socket: requestBody.specification.cpu.socket,
@@ -110,7 +110,7 @@ export default defineEventHandler(async (event) => {
     const gpuResult = await useDrizzle()
       .insert(gpus)
       .values({
-        specification_id: insertedIds.specification_id,
+        specification_id: insertedIds.specification_id[0],
         brand: requestBody.specification.gpu.brand,
         manufacturer: requestBody.specification.gpu.manufacturer,
         model: requestBody.specification.gpu.model,
@@ -124,7 +124,7 @@ export default defineEventHandler(async (event) => {
     const moboResult = await useDrizzle()
       .insert(motherboards)
       .values({
-        specification_id: insertedIds.specification_id,
+        specification_id: insertedIds.specification_id[0],
         brand: requestBody.specification.motherboard.brand,
         model: requestBody.specification.motherboard.model,
       })
@@ -137,7 +137,7 @@ export default defineEventHandler(async (event) => {
       const ramResult = await useDrizzle()
         .insert(rams)
         .values({
-          specification_id: insertedIds.specification_id,
+          specification_id: insertedIds.specification_id[0],
           brand: ram.brand,
           model: ram.model,
           size: ram.size,
@@ -153,7 +153,7 @@ export default defineEventHandler(async (event) => {
       const storageResult = await useDrizzle()
         .insert(storages)
         .values({
-          specification_id: insertedIds.specification_id,
+          specification_id: insertedIds.specification_id[0],
           brand: storage.brand,
           model: storage.model,
           capacity: storage.capacity,
@@ -168,7 +168,7 @@ export default defineEventHandler(async (event) => {
     const psuResult = await useDrizzle()
       .insert(power_supplies)
       .values({
-        specification_id: insertedIds.specification_id,
+        specification_id: insertedIds.specification_id[0],
         brand: requestBody.specification.power_supply.brand,
         model: requestBody.specification.power_supply.model,
         wattage: requestBody.specification.power_supply.wattage,
@@ -181,7 +181,7 @@ export default defineEventHandler(async (event) => {
     const coolerResult = await useDrizzle()
       .insert(cpu_coolers)
       .values({
-        specification_id: insertedIds.specification_id,
+        specification_id: insertedIds.specification_id[0],
         brand: requestBody.specification.cpu_cooler.brand,
         model: requestBody.specification.cpu_cooler.model,
         type: requestBody.specification.cpu_cooler.type,
@@ -195,7 +195,7 @@ export default defineEventHandler(async (event) => {
       const fanResult = await useDrizzle()
         .insert(case_fans)
         .values({
-          specification_id: insertedIds.specification_id,
+          specification_id: insertedIds.specification_id[0],
           brand: fan.brand,
           model: fan.model,
           quantity: fan.quantity,
@@ -209,7 +209,7 @@ export default defineEventHandler(async (event) => {
     insertedIds.cases = insertRow(
       "cases",
       {
-        specification_id: insertedIds.specification_id,
+        specification_id: insertedIds.specification_id[0],
         brand: requestBody.specification.case.brand,
         model: requestBody.specification.case.model,
         form_factor: requestBody.specification.case.form_factor,
@@ -221,7 +221,6 @@ export default defineEventHandler(async (event) => {
   } catch (error) {
     console.error("Transaction failed:", error);
 
-    // Rollback operations
     rollbackRows("cases", insertedIds.cases);
     rollbackRows("case_fans", insertedIds.case_fans);
     rollbackRows("cpu_coolers", insertedIds.cpu_coolers);

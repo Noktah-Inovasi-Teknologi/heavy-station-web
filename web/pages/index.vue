@@ -57,8 +57,8 @@ async function fetchNewPage(pageValue: number) {
 }
 
 onMounted(async () => {
-  await fetchBuildsTotal();
-  await fetchBuilds();
+  // await fetchBuildsTotal();
+  // await fetchBuilds();
   console.log(catalogue.value);
 });
 </script>

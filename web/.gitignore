@@ -27,3 +27,4 @@ logs
 *.png
 *.jpg
 *.jpeg
+.wrangler
