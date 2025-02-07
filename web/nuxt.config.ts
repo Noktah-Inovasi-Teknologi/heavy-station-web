@@ -19,6 +19,9 @@ export default defineNuxtConfig({
       ],
     },
   },
+  build: {
+    transpile: ["googleapis"],
+  },
   compatibilityDate: "2024-11-01",
   css: ["@/assets/styles/tailwind.css", "@/assets/styles/base.css"],
   devtools: { enabled: true },

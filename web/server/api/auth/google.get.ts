@@ -1,7 +1,9 @@
 import { sendRedirect } from 'h3';
+// import { google } from 'googleapis';
+
+const { google } = require('googleapis');
 
 // Initialize OAuth2 client
-const { google } = require('googleapis');
 // export default defineEventHandler(async (event) => {
 //   // Generate the authorization URL
 //   const authorizationUrl = oauth2Client.generateAuthUrl({
@@ -17,14 +19,18 @@ const { google } = require('googleapis');
 // });
 
 // Initialize OAuth2 client
-const oauth2Client = new google.auth.OAuth2(
-  process.env.GOOGLE_CLIENT_ID,
-  process.env.GOOGLE_CLIENT_SECRET,
-  process.env.GOOGLE_REDIRECT_URL
-);
 
 export default defineEventHandler(async (event) => {
   const { code, error } = getQuery(event);
+  
+
+  const oauth2Client = new google.auth.OAuth2(
+    process.env.GOOGLE_CLIENT_ID,
+    process.env.GOOGLE_CLIENT_SECRET,
+    process.env.GOOGLE_REDIRECT_URL
+  );
+
+  console.log("OAuth2 client initialized:", oauth2Client);
 
   // If there's no `code`, this is the initial redirect to Google Auth
   if (!code) {
