@@ -1,3 +1,10 @@
 {
+  "compilerOptions": {
+    "target": "ESNext", // Use the latest ECMAScript version
+    "module": "ESNext", // Use ES modules
+    "moduleResolution": "Node",
+    "esModuleInterop": true,
+    "strict": true
+  },
   "extends": "../.nuxt/tsconfig.server.json"
 }

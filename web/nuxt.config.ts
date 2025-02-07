@@ -64,4 +64,12 @@ export default defineNuxtConfig({
       },
     },
   },
+  typescript: {
+    tsConfig: {
+      compilerOptions: {
+        target: 'ESNext', // Ensure TypeScript targets ESNext
+        module: 'ESNext', // Ensure TypeScript uses ES modules
+      },
+    },
+  },
 });
