@@ -1,7 +1,10 @@
 import { sendRedirect } from 'h3';
 
 // Initialize OAuth2 client
-const { google } = await import ('googleapis');
+let google: any;
+(async () => {
+  google = (await import('googleapis')).google;
+})();
 // export default defineEventHandler(async (event) => {
 //   // Generate the authorization URL
 //   const authorizationUrl = oauth2Client.generateAuthUrl({
