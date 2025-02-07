@@ -1,4 +1,4 @@
-import { db } from "~/utils/db/index";
+import { useDrizzle } from "~/utils/db/index";
 import {
   builds,
   teams,
@@ -41,18 +41,13 @@ export default defineEventHandler(async (event) => {
       statusMessage: `Invalid table name: ${queries.table}`,
     });
   }
-  const result = await db.transaction(async (tx) => {
-    const resultDelete: any = await tx
-      .delete(tableSchema)
-      .where(eq(tableSchema.id, queries.id))
-      .returning();
-
-    if (resultDelete.length === 0) {
-      return { success: false };
-    } else {
-      return { success: true };
-    }
-  });
   
-  return result
+  // Transaction
+  try {
+    await useDrizzle().delete(tableSchema).where(eq(tableSchema.id, queries.id));
+    return { success: true };
+  } catch (error) {
+    console.error("Transaction failed:", error);
+    return { success: false, error };
+  }
 });

@@ -1,14 +1,13 @@
-import { db } from "~/utils/db/index";
 import { builds } from "~/utils/db/schema";
 import { teams, galleries } from "~/utils/db/schema";
 import { eq, sql } from "drizzle-orm";
-import { SQLiteRaw } from "drizzle-orm/sqlite-core/query-builders/raw";
+import { useDrizzle } from "~/utils/db";
 
 export default defineEventHandler(async (event) => {
   const query: any = getQuery(event);
   query.page_size = Number(query.page_size);
   const offset = Number(query.page - 1) * query.page_size;
-  const result = await db
+  const result = await useDrizzle()
     .select({
       id: builds.id,
       code: builds.code,

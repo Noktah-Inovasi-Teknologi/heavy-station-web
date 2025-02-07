@@ -1,4 +1,4 @@
-import { db } from "~/utils/db/index";
+import { useDrizzle } from "~/utils/db/index";
 import { builds } from "~/utils/db/schema";
 
 export default defineEventHandler(async () => {
