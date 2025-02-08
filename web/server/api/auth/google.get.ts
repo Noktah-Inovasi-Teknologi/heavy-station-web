@@ -95,31 +95,34 @@ import { sendRedirect } from 'h3';
 
 
 // import { useState } from "nuxt/app";
+export default defineEventHandler((event) => {
+  console.log(getQuery(event))
 
-export default defineOAuthGoogleEventHandler({
-  config: {
-    authorizationURL: "https://accounts.google.com/o/oauth2/auth",
-    tokenURL: "https://oauth2.googleapis.com/token",
-    userURL: "https://www.googleapis.com/oauth2/v2/userinfo",
-    clientId: process.env.GOOGLE_CLIENT_ID,
-    clientSecret: process.env.GOOGLE_CLIENT_SECRET,
-    redirectURL: process.env.GOOGLE_REDIRECT_URL,
-    authorizationParams: {
-      access_type: "offline",
-      scope: "email profile openid",
-    }
-  },
-  async onError(event, error) {
-    return console.log("error happened", error, event);
-  },
-  async onSuccess(event, { user }) {
-    console.log("This actually succeed", event, user)
-    user.admin = user.email === process.env.ADMIN_EMAIL && user.sub === process.env.ADMIN_SUB;
-    await setUserSession(event, { user });
-    return sendRedirect(event, "/");
-  },
+  if (!getQuery(event).code) {
+    defineOAuthGoogleEventHandler({
+      config: {
+        authorizationURL: "https://accounts.google.com/o/oauth2/auth",
+        tokenURL: "https://oauth2.googleapis.com/token",
+        userURL: "https://www.googleapis.com/oauth2/v2/userinfo",
+        clientId: process.env.GOOGLE_CLIENT_ID,
+        clientSecret: process.env.GOOGLE_CLIENT_SECRET,
+        redirectURL: process.env.GOOGLE_REDIRECT_URL,
+        authorizationParams: {
+          access_type: "offline",
+          scope: "email profile openid",
+        }
+      },
+      async onError(event, error) {
+        return console.log("error happened", error, event);
+      },
+      async onSuccess(event, { user }) {
+        console.log("This actually succeed", event, user)
+        user.admin = user.email === process.env.ADMIN_EMAIL && user.sub === process.env.ADMIN_SUB;
+        await setUserSession(event, { user });
+        return sendRedirect(event, "/");
+      },
+    })
+  } else {
+    console.log(getQuery(event))
+  }
 })
-// export default defineEventHandler((event) => {
-//   console.log(event)
-//   return "Auth can be accessed";
-// })
