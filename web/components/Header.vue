@@ -1,8 +1,10 @@
 <script lang="ts" setup>
+// import { hasPermissions } from '../utils/common';
+
 interface MenuItem {
   label: string;
   to: string;
-  admin: boolean;
+  permissions?: string[];
 }
 
 let route = useRoute();
@@ -10,26 +12,44 @@ let menu = ref<MenuItem[]>([
   {
     label: "Katalog",
     to: "/",
-    admin: false,
   },
   {
     label: "Simulasi Rakit PC",
     to: "/simulasi-rakit-pc",
-    admin: false,
   },
   {
     label: "Dasbor",
     to: "/dashboard",
-    admin: true,
+    permissions: ["dashboard"],
   },
 ]);
+let hasAdminPermission = ref(false);
 
-const { loggedIn, user, session, fetch, clear } = useUserSession();
+const client = useKindeClient()
+
+const { data: permissions } = await useAsyncData(async () => {
+  const { permissions } = await client?.getPermissions() ?? {}
+  return permissions
+})
+
+const hasPermissions = (permissions: string[]) => {
+  return permissions.every((permission) => {
+    return (permissions as string[]).includes(permission)
+  })
+}
+
+// const { loggedIn, user, session, fetch, clear } = useUserSession();
+
+// const isLoggedIn 
 
 async function logout() {
-  await clear();
+  // await clear();
   window.location.reload();
 }
+onMounted(async () => {
+  // hasAdminPermission.value = await hasPermissions(["dashboard"]);
+  console.log(await hasPermissions(["dashboard"]));
+});
 </script>
 
 <template>
@@ -52,7 +72,7 @@ async function logout() {
               },
             ]"
             :to="item.to"
-            v-if="!item.admin || (item.admin && (user as any)?.admin)"
+            v-if="!item.permissions || hasPermissions(item.permissions)"
           >
             <p class="">
               {{ item.label }}
@@ -62,27 +82,38 @@ async function logout() {
         <div
           class="min-w-[19rem] px-16 border-l border-b border-[#2C2C2C] flex items-center"
         >
-          <div class="w-full flex items-center gap-4" v-if="loggedIn">
-            <img class="w-11 aspect-square" :src="(user as any)?.picture" />
+          <div class="w-full flex items-center gap-4" v-if="$auth.loggedIn">
+            <img class="w-11 aspect-square" :src="($auth.user as Record<string, any>)?.picture" />
             <p class="font-hostgrotesk text-[#FA1D33] text-md text-center">
-              {{ (user as any).given_name }}
+              {{ ($auth.user as Record<string, any>).name }}
             </p>
             <div>
               <Button class="w-full" @click="logout()" severity="warn">
+                <a
+                href="/api/logout"
+                class="w-full flex gap-4 items-center justify-center"
+              >
                 <Icon name="uil:sign-out-alt" class="text-2xl" />
+              </a>
               </Button>
             </div>
           </div>
           <div class="w-full" v-else>
             <Button class="w-full" severity="contrast">
               <a
-                href="/api/auth/google"
+                href="/api/login"
                 class="w-full flex gap-4 items-center justify-center"
               >
                 <Icon name="uil:google" class="text-2xl" />
                 <p class="text-nowrap">Sign In</p>
               </a>
             </Button>
+            <div class="pt-1 flex items-center justify-between">
+              <p class="text-[#AFAFAF] text-sm">Belum punya akun? </p>
+              <NuxtLink class="text-[#FA1D33] text-sm hover:underline" to="/api/register" external>
+                Daftar
+              </NuxtLink>
+            </div>
           </div>
         </div>
       </div>

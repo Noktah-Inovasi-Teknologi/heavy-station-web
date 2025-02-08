@@ -52,6 +52,7 @@ export default defineNuxtConfig({
     "nuxt-auth-utils",
     "nuxt-lodash",
     "@nuxthub/core",
+    "@nuxtjs/kinde"
   ],
   primevue: {
     options: {

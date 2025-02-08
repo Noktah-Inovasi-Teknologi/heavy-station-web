@@ -1,4 +1,8 @@
 <script lang="ts" setup>
+definePageMeta({
+  middleware: ["auth-logged-in"]
+})
+
 let isLoaded = ref(false);
 let contentPage = ref(0);
 
