@@ -1,4 +1,4 @@
-import { sendRedirect } from 'h3';
+import { sendRedirect } from "h3";
 // import { google } from 'googleapis';
 
 // const { google } = require('googleapis');
@@ -22,7 +22,6 @@ import { sendRedirect } from 'h3';
 
 // export default defineEventHandler(async (event) => {
 //   const { code, error } = getQuery(event);
-  
 
 //   const oauth2Client = new google.auth.OAuth2(
 //     process.env.GOOGLE_CLIENT_ID,
@@ -93,13 +92,12 @@ import { sendRedirect } from 'h3';
 //   }
 // });
 
-
 // import { useState } from "nuxt/app";
-export default defineEventHandler((event) => {
-  console.log(getQuery(event))
+export default defineEventHandler(async (event) => {
+  console.log(getQuery(event));
 
   if (!getQuery(event).code) {
-    defineOAuthGoogleEventHandler({
+    return defineOAuthGoogleEventHandler({
       config: {
         authorizationURL: "https://accounts.google.com/o/oauth2/auth",
         tokenURL: "https://oauth2.googleapis.com/token",
@@ -110,19 +108,46 @@ export default defineEventHandler((event) => {
         authorizationParams: {
           access_type: "offline",
           scope: "email profile openid",
-        }
+        },
       },
       async onError(event, error) {
         return console.log("error happened", error, event);
       },
       async onSuccess(event, { user }) {
-        console.log("This actually succeed", event, user)
-        user.admin = user.email === process.env.ADMIN_EMAIL && user.sub === process.env.ADMIN_SUB;
+        console.log("This actually succeed", event, user);
+        user.admin =
+          user.email === process.env.ADMIN_EMAIL &&
+          user.sub === process.env.ADMIN_SUB;
         await setUserSession(event, { user });
         return sendRedirect(event, "/");
       },
-    })
+    })(event);
   } else {
-    console.log(getQuery(event))
+    console.log(getQuery(event));
+    return defineOAuthGoogleEventHandler({
+      config: {
+        authorizationURL: "https://accounts.google.com/o/oauth2/auth",
+        tokenURL: "https://oauth2.googleapis.com/token",
+        userURL: "https://www.googleapis.com/oauth2/v2/userinfo",
+        clientId: process.env.GOOGLE_CLIENT_ID,
+        clientSecret: process.env.GOOGLE_CLIENT_SECRET,
+        redirectURL: process.env.GOOGLE_REDIRECT_URL,
+        authorizationParams: {
+          access_type: "offline",
+          scope: "email profile openid",
+        },
+      },
+      async onError(event, error) {
+        return console.log("error happened", error, event);
+      },
+      async onSuccess(event, { user }) {
+        console.log("This actually succeed", event, user);
+        user.admin =
+          user.email === process.env.ADMIN_EMAIL &&
+          user.sub === process.env.ADMIN_SUB;
+        await setUserSession(event, { user });
+        return sendRedirect(event, "/");
+      },
+    })(event);
   }
-})
+});
