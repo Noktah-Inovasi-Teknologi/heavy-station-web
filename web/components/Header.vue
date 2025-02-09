@@ -25,22 +25,22 @@ let menu = ref<MenuItem[]>([
 ]);
 let hasAdminPermission = ref(false);
 
-const client = useKindeClient()
+const client = useKindeClient();
 
 const { data: permissions } = await useAsyncData(async () => {
-  const { permissions } = await client?.getPermissions() ?? {}
-  return permissions
-})
+  const { permissions } = (await client?.getPermissions()) ?? {};
+  return permissions;
+});
 
 const hasPermissions = (permissions: string[]) => {
   return permissions.every((permission) => {
-    return (permissions as string[]).includes(permission)
-  })
-}
+    return (permissions as string[]).includes(permission);
+  });
+};
 
 // const { loggedIn, user, session, fetch, clear } = useUserSession();
 
-// const isLoggedIn 
+// const isLoggedIn
 
 async function logout() {
   // await clear();
@@ -83,23 +83,26 @@ onMounted(async () => {
           class="min-w-[19rem] px-16 border-l border-b border-[#2C2C2C] flex items-center"
         >
           <div class="w-full flex items-center gap-4" v-if="$auth.loggedIn">
-            <img class="w-11 aspect-square" :src="($auth.user as Record<string, any>)?.picture" />
+            <img
+              class="w-11 aspect-square"
+              :src="($auth.user as any)?.picture"
+            />
             <p class="font-hostgrotesk text-[#FA1D33] text-md text-center">
-              {{ ($auth.user as Record<string, any>).name }}
+              {{ ($auth.user as any).name }}
             </p>
             <div>
               <Button class="w-full" @click="logout()" severity="warn">
                 <a
-                href="/api/logout"
-                class="w-full flex gap-4 items-center justify-center"
-              >
-                <Icon name="uil:sign-out-alt" class="text-2xl" />
-              </a>
+                  href="/api/logout"
+                  class="w-full flex gap-4 items-center justify-center"
+                >
+                  <Icon name="uil:sign-out-alt" class="text-2xl" />
+                </a>
               </Button>
             </div>
           </div>
           <div class="w-full" v-else>
-            <LoginLink />
+            <LoginLink to="/api/login" external> Sign in </LoginLink>
             <Button class="w-full" severity="contrast">
               <a
                 href="/api/login"
@@ -110,8 +113,12 @@ onMounted(async () => {
               </a>
             </Button>
             <div class="pt-1 flex items-center justify-between">
-              <p class="text-[#AFAFAF] text-sm">Belum punya akun? </p>
-              <NuxtLink class="text-[#FA1D33] text-sm hover:underline" to="/api/register" external>
+              <p class="text-[#AFAFAF] text-sm">Belum punya akun?</p>
+              <NuxtLink
+                class="text-[#FA1D33] text-sm hover:underline"
+                to="/api/register"
+                external
+              >
                 Daftar
               </NuxtLink>
             </div>
