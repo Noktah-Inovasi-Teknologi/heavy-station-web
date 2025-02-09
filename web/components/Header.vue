@@ -1,6 +1,4 @@
 <script lang="ts" setup>
-import { LoginLink } from '#build/components';
-
 // import { hasPermissions } from '../utils/common';
 
 interface MenuItem {
