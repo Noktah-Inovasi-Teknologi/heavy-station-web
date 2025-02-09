@@ -1,3 +1,3 @@
 export default defineEventHandler((event) => {
-    return "Auth can be accessed";
+    return "Auth can be accessed bruh";
 })
