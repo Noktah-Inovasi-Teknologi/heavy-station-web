@@ -19,9 +19,6 @@ export default defineNuxtConfig({
       ],
     },
   },
-  build: {
-    transpile: ["googleapis"],
-  },
   compatibilityDate: "2024-11-01",
   css: ["@/assets/styles/tailwind.css", "@/assets/styles/base.css"],
   debug: true,
@@ -61,7 +58,6 @@ export default defineNuxtConfig({
     "@primevue/nuxt-module",
     "@nuxtjs/tailwindcss",
     "@nuxt/icon",
-    "nuxt-auth-utils",
     "nuxt-lodash",
     "@nuxthub/core",
     "@nuxtjs/kinde"
@@ -72,21 +68,6 @@ export default defineNuxtConfig({
     },
   },
   runtimeConfig: {
-    oauth: {
-      google: {
-        clientId: process.env.GOOGLE_CLIENT_ID,
-        clientSecret: process.env.GOOGLE_CLIENT_SECRET,
-        redirectURL: process.env.GOOGLE_REDIRECT_URL,
-      },
-    },
-    public: {
-      authDomain: process.env.NUXT_KINDE_AUTH_DOMAIN,
-      clientId: process.env.NUXT_KINDE_CLIENT_ID,
-      clientSecret: process.env.NUXT_KINDE_CLIENT_SECRET,
-      redirectURL: process.env.NUXT_KINDE_REDIRECT_URL,
-      logoutRedirectURL: process.env.NUXT_KINDE_LOGOUT_REDIRECT_URL,
-      postLoginRedirectURL: process.env.NUXT_KINDE_POST_LOGIN_REDIRECT_URL,
-      password: process.env.NUXT_KINDE_PASSWORD,
-    }
+
   },
 });
