@@ -39,6 +39,7 @@ export default defineNuxtConfig({
         },
       },
     },
+    preset: "cloudflare-pages"
   },
   hub: {
     database: true,
@@ -47,6 +48,7 @@ export default defineNuxtConfig({
     cache: true,
   },
   kinde: {
+    debug: true,
     authDomain: process.env.NUXT_KINDE_AUTH_DOMAIN,
     clientId: process.env.NUXT_KINDE_CLIENT_ID,
     clientSecret: process.env.NUXT_KINDE_CLIENT_SECRET,
