@@ -1,4 +1,6 @@
 <script lang="ts" setup>
+import { LoginLink } from '#build/components';
+
 // import { hasPermissions } from '../utils/common';
 
 interface MenuItem {
@@ -99,6 +101,7 @@ onMounted(async () => {
             </div>
           </div>
           <div class="w-full" v-else>
+            <LoginLink />
             <Button class="w-full" severity="contrast">
               <a
                 href="/api/login"
