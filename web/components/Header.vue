@@ -32,20 +32,13 @@ const { data: permissions } = await useAsyncData(async () => {
   return permissions;
 });
 
+console.log("permissions", permissions);
+
 const hasPermissions = (permissions: string[]) => {
   return permissions.every((permission) => {
     return (permissions as string[]).includes(permission);
   });
 };
-
-// const { loggedIn, user, session, fetch, clear } = useUserSession();
-
-// const isLoggedIn
-
-async function logout() {
-  // await clear();
-  window.location.reload();
-}
 onMounted(async () => {
   // hasAdminPermission.value = await hasPermissions(["dashboard"]);
   console.log(await hasPermissions(["dashboard"]));
@@ -91,7 +84,7 @@ onMounted(async () => {
               {{ ($auth.user as any).name }}
             </p>
             <div>
-              <Button class="w-full" @click="logout()" severity="warn">
+              <Button class="w-full" severity="warn">
                 <a
                   href="/api/logout"
                   class="w-full flex gap-4 items-center justify-center"
