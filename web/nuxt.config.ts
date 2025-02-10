@@ -21,7 +21,6 @@ export default defineNuxtConfig({
   },
   compatibilityDate: "2024-11-01",
   css: ["@/assets/styles/tailwind.css", "@/assets/styles/base.css"],
-  debug: true,
   devtools: { enabled: true },
   nitro: {
     experimental: {
@@ -44,16 +43,6 @@ export default defineNuxtConfig({
     blob: true,
     cache: true,
   },
-  kinde: {
-    debug: true,
-    authDomain: process.env.NUXT_KINDE_AUTH_DOMAIN,
-    clientId: process.env.NUXT_KINDE_CLIENT_ID,
-    clientSecret: process.env.NUXT_KINDE_CLIENT_SECRET,
-    redirectURL: process.env.NUXT_KINDE_REDIRECT_URL,
-    logoutRedirectURL: process.env.NUXT_KINDE_LOGOUT_REDIRECT_URL,
-    postLoginRedirectURL: process.env.NUXT_KINDE_POST_LOGIN_REDIRECT_URL,
-    password: process.env.NUXT_KINDE_PASSWORD,
-  },
   modules: [
     "@primevue/nuxt-module",
     "@nuxtjs/tailwindcss",
@@ -66,8 +55,5 @@ export default defineNuxtConfig({
     options: {
       theme: "none",
     },
-  },
-  runtimeConfig: {
-
   },
 });

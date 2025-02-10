@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-// import { hasPermissions } from '../utils/common';
+import { hasPermissions } from '../utils/common';
 
 interface MenuItem {
   label: string;
@@ -23,26 +23,8 @@ let menu = ref<MenuItem[]>([
     permissions: ["dashboard"],
   },
 ]);
-let hasAdminPermission = ref(false);
-
-const client = useKindeClient();
-
-const { data: permissions } = await useAsyncData(async () => {
-  const { permissions } = (await client?.getPermissions()) ?? {};
-  return permissions;
-});
-
-console.log("permissions", permissions);
-
-const hasPermissions = (permissions: string[]) => {
-  return permissions.every((permission) => {
-    return (permissions as string[]).includes(permission);
-  });
-};
-onMounted(async () => {
-  // hasAdminPermission.value = await hasPermissions(["dashboard"]);
-  console.log(await hasPermissions(["dashboard"]));
-});
+let hasAdminPermission = ref(Boolean(await hasPermissions(["dashboard"]))
+);
 </script>
 
 <template>
@@ -65,7 +47,7 @@ onMounted(async () => {
               },
             ]"
             :to="item.to"
-            v-if="!item.permissions || hasPermissions(item.permissions)"
+            v-if="!item.permissions || hasAdminPermission"
           >
             <p class="">
               {{ item.label }}

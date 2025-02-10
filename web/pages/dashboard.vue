@@ -3,8 +3,15 @@ definePageMeta({
   middleware: ["auth-logged-in"]
 })
 
+let hasAdminPermission = ref(Boolean(await hasPermissions(["dashboard"])))
 let isLoaded = ref(false);
 let contentPage = ref(0);
+
+onBeforeMount(() => {
+  if (!hasAdminPermission.value) {
+    navigateTo("/403");
+  }
+})
 
 onMounted(async () => {
   isLoaded.value = true;
