@@ -102,7 +102,6 @@ onMounted(async () => {
             </div>
           </div>
           <div class="w-full" v-else>
-            <LoginLink to="/api/login" external> Sign in </LoginLink>
             <Button class="w-full" severity="contrast">
               <a
                 href="/api/login"
