@@ -1,23 +1,9 @@
-export async function hasPermissions(permissionList: string[], withPermissions: boolean = false): Promise<{ value: boolean; permissions?: any}> {
-  const client = useKindeClient();
-  const { data: permissions } = await useAsyncData(async () => {
-    const { permissions } = (await client?.getPermissions()) ?? {};
-    return permissions;
+export async function hasPermissions(permissionList: string[]) {
+  const permissions = await useFetch("/api/auth/permissions", {
+    method: "GET",
   });
-  if (permissions.value && Array.isArray(permissions.value)) {
-    if (withPermissions) {
-      return { value: permissionList.every((permission) => (permissions.value as any).includes(permission)), permissions: permissions.value };
-    } else {
-    return { value: permissionList.every((permission) =>
-      (permissions.value as any).includes(permission)
-    )};
-   }
-  }
-  if (withPermissions) {
-    return { value: false, permissions: permissions.value };
-  } else {
-    return { value: false };
-  }
+  console.log("Her elies permissions", permissions.data.value);
+  return { value: permissionList.every((permission) => permissions.data.value.includes(permission)) };
 }
 
 export async function loadUser() {

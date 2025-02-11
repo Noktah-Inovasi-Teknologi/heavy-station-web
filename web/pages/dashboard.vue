@@ -8,19 +8,23 @@ definePageMeta({
 let hasAdminPermission = ref<Boolean | undefined>(undefined)
 let isLoaded = ref(false);
 let contentPage = ref(0);
+let { value } = await hasPermissions(["dashboard"]);
+
+
 
 watch(hasAdminPermission, (newVal, oldVal) => {
   if (oldVal === undefined && typeof newVal === "boolean") {
+    console.log(oldVal, newVal);
     if (!hasAdminPermission.value) {
-      navigateTo("/403");
+      console.log("403")
+      // navigateTo("/403");
     } else {
       isLoaded.value = true;
     }
   }
 })
 
-onBeforeMount(async () => {
-  let { value } = await hasPermissions(["dashboard"], true);
+onMounted(async () => {
   hasAdminPermission.value = value;
 });
 </script>

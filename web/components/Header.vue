@@ -24,9 +24,10 @@ let menu = ref<MenuItem[]>([
     permissions: ["dashboard"],
   },
 ]);
+// let client = useKindeClient();
+let { value } = await hasPermissions(["dashboard"]);
 
 onBeforeMount(async () => {
-  let { value } = await hasPermissions(["dashboard"]);
   hasAdminPermission.value = value;
 });
 </script>
