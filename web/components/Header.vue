@@ -8,6 +8,7 @@ interface MenuItem {
 }
 
 let route = useRoute();
+let hasAdminPermission = ref<Boolean | undefined>(undefined);
 let menu = ref<MenuItem[]>([
   {
     label: "Katalog",
@@ -23,8 +24,11 @@ let menu = ref<MenuItem[]>([
     permissions: ["dashboard"],
   },
 ]);
-let hasAdminPermission = ref(Boolean(await hasPermissions(["dashboard"]))
-);
+
+onBeforeMount(async () => {
+  let { value } = await hasPermissions(["dashboard"]);
+  hasAdminPermission.value = value;
+});
 </script>
 
 <template>
@@ -63,7 +67,7 @@ let hasAdminPermission = ref(Boolean(await hasPermissions(["dashboard"]))
               :src="($auth.user as any)?.picture"
             />
             <p class="font-hostgrotesk text-[#FA1D33] text-md text-center">
-              {{ ($auth.user as any).name }}
+              {{ ($auth.user as any).given_name }}
             </p>
             <div>
               <Button class="w-full" severity="warn">

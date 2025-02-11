@@ -1,20 +1,27 @@
 <script lang="ts" setup>
+import { hasPermissions } from "../utils/common";
+
 definePageMeta({
   middleware: ["auth-logged-in"]
 })
 
-let hasAdminPermission = ref(Boolean(await hasPermissions(["dashboard"])))
+let hasAdminPermission = ref<Boolean | undefined>(undefined)
 let isLoaded = ref(false);
 let contentPage = ref(0);
 
-onBeforeMount(() => {
-  if (!hasAdminPermission.value) {
-    navigateTo("/403");
+watch(hasAdminPermission, (newVal, oldVal) => {
+  if (oldVal === undefined && typeof newVal === "boolean") {
+    if (!hasAdminPermission.value) {
+      navigateTo("/403");
+    } else {
+      isLoaded.value = true;
+    }
   }
 })
 
-onMounted(async () => {
-  isLoaded.value = true;
+onBeforeMount(async () => {
+  let { value } = await hasPermissions(["dashboard"], true);
+  hasAdminPermission.value = value;
 });
 </script>
 
