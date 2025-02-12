@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-import { hasPermissions } from '../utils/common';
+import { hasPermissions } from "../utils/common";
 
 interface MenuItem {
   label: string;
@@ -24,7 +24,6 @@ let menu = ref<MenuItem[]>([
     permissions: ["dashboard"],
   },
 ]);
-// let client = useKindeClient();
 let { value } = await hasPermissions(["dashboard"]);
 
 onBeforeMount(async () => {

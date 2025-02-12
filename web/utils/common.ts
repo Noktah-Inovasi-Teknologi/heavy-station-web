@@ -2,8 +2,11 @@ export async function hasPermissions(permissionList: string[]) {
   const permissions = await useFetch("/api/auth/permissions", {
     method: "GET",
   });
-  console.log("Her elies permissions", permissions.data.value);
-  return { value: permissionList.every((permission) => permissions.data.value.includes(permission)) };
+  return {
+    value: permissionList.every((permission) =>
+      permissions.data.value.includes(permission)
+    ),
+  };
 }
 
 export async function loadUser() {
