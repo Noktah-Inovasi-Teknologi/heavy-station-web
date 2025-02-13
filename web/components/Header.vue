@@ -24,11 +24,11 @@ let menu = ref<MenuItem[]>([
     permissions: ["dashboard"],
   },
 ]);
-let { value } = await hasPermissions(["dashboard"]);
-
-onBeforeMount(async () => {
+const auth = useAuth();
+if (auth.loggedIn) {
+  let { value } = await hasPermissions(["dashboard"]);
   hasAdminPermission.value = value;
-});
+}
 </script>
 
 <template>

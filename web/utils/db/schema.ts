@@ -155,7 +155,7 @@ export const price_histories = p.sqliteTable("price_histories", {
     .integer()
     .notNull()
     .references(() => components.id, { onDelete: "cascade" }),
-  date: p.text().notNull(), // YYYY-MM-DD
+  date: p.integer({ mode: "timestamp"}).notNull(), // YYYY-MM-DD
   price: p.integer().notNull(),
   available: p.integer({ mode: "boolean" }),
 });

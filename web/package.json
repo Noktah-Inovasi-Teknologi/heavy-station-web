@@ -11,6 +11,7 @@
     "postinstall": "nuxt prepare"
   },
   "dependencies": {
+    "@json2csv/node": "^7.0.6",
     "@nuxt/icon": "^1.10.3",
     "@nuxthub/core": "^0.8.16",
     "@nuxtjs/kinde": "^0.1.11",

@@ -12,7 +12,6 @@ let { value } = await hasPermissions(["dashboard"]);
 
 watch(hasAdminPermission, (newVal, oldVal) => {
   if (oldVal === undefined && typeof newVal === "boolean") {
-    console.log(oldVal, newVal);
     if (!hasAdminPermission.value) {
       navigateTo("/403");
     } else {
@@ -36,9 +35,14 @@ onMounted(async () => {
       >
         Import Data
       </div>
+      
+      <div class="p-8 hover:bg-[#414141] hover:cursor-pointer font-kanit text-[#FA1D33] text-xl"
+      @click="contentPage = 1">
+        Export Data
+      </div>
       <div
         class="p-8 hover:bg-[#414141] hover:cursor-pointer font-kanit text-[#FA1D33] text-xl"
-        @click="contentPage = 1"
+        @click="contentPage = 2"
       >
         Data
       </div>
@@ -48,7 +52,8 @@ onMounted(async () => {
       id="content"
     >
       <DataImporter v-if="contentPage == 0" />
-      <DataViewer class="w-full" v-if="contentPage == 1" />
+      <DataExporter v-else-if="contentPage == 1" />
+      <DataViewer class="w-full" v-else-if="contentPage == 2" />
     </div>
   </div>
   <Toast />

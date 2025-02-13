@@ -50,6 +50,13 @@
       "when": 1738765836130,
       "tag": "0006_dusty_spirit",
       "breakpoints": true
+    },
+    {
+      "idx": 7,
+      "version": "6",
+      "when": 1739368045178,
+      "tag": "0007_neat_havok",
+      "breakpoints": true
     }
   ]
 }

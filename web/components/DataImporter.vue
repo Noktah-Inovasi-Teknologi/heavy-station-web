@@ -52,6 +52,7 @@ let specification = ref<Record<string, any>>({
 let galleries = ref<Record<string, any>[]>([]);
 
 let fileComponentCSV = ref();
+let filePriceHistoryCSV = ref();
 
 // Options
 const teamOptions = [
@@ -206,7 +207,7 @@ function saveBuild() {
     },
   });
 }
-function saveComponentCSV(event: any) {
+function uploadCSV(event: any) {
   // console.log(event);
   // $fetch("/api/component", {
   //   method: "POST",
@@ -225,6 +226,7 @@ onMounted(async () => {
       <TabList>
         <Tab value="0">Single Form</Tab>
         <Tab value="1">Import Product CSV</Tab>
+        <Tab value="2">Import Price History CSV</Tab>
       </TabList>
       <TabPanels>
         <TabPanel value="0">
@@ -702,8 +704,14 @@ onMounted(async () => {
         </TabPanel>
         <TabPanel value="1">
           <div class="flex flex-col gap-8">
-            <FileUpload accept=".csv" class="w-full" :maxFileSize="1000000" mode="basic" name="demo[]" ref="fileComponentCSV" @upload="saveComponentCSV" url="api/component" />
+            <FileUpload accept=".csv" class="w-full" :maxFileSize="1000000" mode="basic" name="demo[]" ref="fileComponentCSV" @upload="uploadCSV" url="api/component" />
             <Button class="w-full" @click="fileComponentCSV.upload()" label="Upload" severity="secondary" />
+          </div>
+        </TabPanel>
+        <TabPanel value="2">
+          <div class="flex flex-col gap-8">
+            <FileUpload accept=".csv" class="w-full" :maxFileSize="1000000" mode="basic" name="demo[]" ref="filePriceHistoryCSV" @upload="uploadCSV" url="api/price_history" />
+            <Button class="w-full" @click="filePriceHistoryCSV.upload()" label="Upload" severity="secondary" />
           </div>
         </TabPanel>
       </TabPanels>

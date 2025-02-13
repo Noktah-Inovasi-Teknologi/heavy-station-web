@@ -58,7 +58,7 @@ export default defineNuxtConfig({
     "@nuxt/icon",
     "nuxt-lodash",
     "@nuxthub/core",
-    "@nuxtjs/kinde"
+    "@nuxtjs/kinde",
   ],
   primevue: {
     options: {
